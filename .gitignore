@@ -1,0 +1,4 @@
+qa/
+*.zip
+*.html
+!index.html

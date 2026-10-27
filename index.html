@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>あなたのリーダータイプ診断｜6問</title>
+  <meta name="description" content="6つの質問から、あなたらしいリーダーシップの傾向を整理する診断です。">
+  <style>
+    :root { --ink:#17221d; --muted:#5c6b62; --paper:#fbfaf5; --card:#fff; --line:#dce5dd; --accent:#217052; --accent-pale:#eaf6ef; --gold:#e6b85c; --shadow:0 18px 50px rgba(24,49,37,.10); }
+    * { box-sizing:border-box; } body { margin:0; background:linear-gradient(145deg,#f5f7f1 0%,#fdfaf0 100%); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; line-height:1.7; }
+    .wrap { width:min(760px,calc(100% - 32px)); margin:0 auto; padding:52px 0 72px; }
+    .hero { text-align:center; margin:0 auto 30px; } .eyebrow { display:inline-block; letter-spacing:.14em; font-size:.76rem; color:var(--accent); font-weight:800; border-bottom:2px solid var(--gold); padding:0 8px 4px; }
+    h1 { margin:16px 0 8px; font-size:clamp(1.85rem,6vw,3rem); line-height:1.25; letter-spacing:.03em; } .lead { margin:0 auto; color:var(--muted); max-width:560px; font-size:.98rem; }
+    .rule { display:flex; gap:10px; align-items:center; background:rgba(255,255,255,.72); border:1px solid var(--line); padding:13px 16px; border-radius:14px; margin:24px 0 28px; color:var(--muted); font-size:.87rem; } .rule b { color:var(--accent); }
+    .progress { height:9px; background:#e4ebe5; overflow:hidden; border-radius:99px; margin:0 0 10px; } .progress > span { display:block; height:100%; width:0%; background:linear-gradient(90deg,#3b9b70,#1d684d); border-radius:99px; transition:width .25s; } .counter { text-align:right; color:var(--muted); font-size:.82rem; margin-bottom:18px; }
+    .question { background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow); border-radius:22px; padding:clamp(20px,5vw,34px); margin-bottom:22px; } .q-number { color:var(--accent); font-weight:800; font-size:.8rem; letter-spacing:.08em; } h2 { margin:8px 0 22px; font-size:clamp(1.25rem,4.6vw,1.62rem); line-height:1.5; }
+    .choices { display:grid; gap:10px; } button.choice { appearance:none; width:100%; text-align:left; border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:14px; padding:14px 15px; font:inherit; cursor:pointer; display:flex; gap:12px; align-items:flex-start; transition:.18s; } button.choice:hover,button.choice:focus-visible { outline:none; border-color:var(--accent); background:var(--accent-pale); transform:translateY(-1px); } .letter { color:white; background:var(--accent); width:26px; height:26px; border-radius:50%; display:grid; place-items:center; flex:0 0 auto; font-size:.78rem; font-weight:800; margin-top:2px; }
+    .result { display:none; background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow); border-radius:22px; overflow:hidden; } .result.show { display:block; } .result-head { padding:36px 28px 30px; background:linear-gradient(135deg,#1f6f51,#174a39); color:#fff; text-align:center; } .result-head .eyebrow { color:#d8f3e4; border-color:var(--gold); } .result-head h2 { margin:12px 0 0; font-size:clamp(1.7rem,6vw,2.5rem); } .result-body { padding:26px; } .result-body h3 { margin:22px 0 8px; color:var(--accent); font-size:1rem; } .result-body p { margin:0; color:#314139; } .tie { display:none; padding:12px 14px; border-radius:12px; color:#68572c; background:#fff6d8; margin-top:18px; font-size:.88rem; } .tie.show { display:block; }
+    .counts { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:22px 0; } .count { border:1px solid var(--line); border-radius:12px; text-align:center; padding:10px 4px; background:#fbfdfb; } .count b { display:block; color:var(--accent); font-size:1.3rem; line-height:1.25; } .count span { font-size:.74rem; color:var(--muted); }
+    .choice.selected { border-color:var(--accent); background:var(--accent-pale); box-shadow:inset 0 0 0 1px var(--accent); } .result-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:26px; } .primary,.secondary { border-radius:12px; border:0; padding:13px 16px; font:inherit; font-weight:800; cursor:pointer; } .primary { background:var(--accent); color:#fff; } .primary:disabled { opacity:.45; cursor:not-allowed; } .secondary { background:#edf2ee; color:var(--ink); } .final-action { margin-top:20px; width:100%; font-size:1rem; } .guide { margin-top:26px; padding:20px; background:#f4f8f4; border:1px solid var(--line); border-radius:16px; } .guide h3 { margin:0 0 8px; color:var(--accent); } .guide p { font-size:.9rem; color:var(--muted); }
+    footer { text-align:center; color:var(--muted); font-size:.75rem; margin-top:25px; }
+    @media (max-width:480px) { .wrap { width:min(100% - 24px,760px); padding-top:32px; } .counts { grid-template-columns:repeat(2,1fr); } button.choice { padding:13px; } }
+
+    /* Passion Leaders Camp visual language: crimson, gold, warm light, and a calm readable form surface. */
+    :root { --ink:#2b1720; --muted:#745653; --paper:#fff8ed; --card:#fffdf8; --line:#e8c99a; --accent:#a81222; --accent-pale:#fff0e2; --gold:#d79a26; --shadow:0 18px 50px rgba(112,18,27,.20); }
+    body { background:radial-gradient(circle at 82% 0%,rgba(255,190,74,.55),transparent 22rem),radial-gradient(circle at 0% 28%,rgba(244,115,48,.36),transparent 20rem),linear-gradient(145deg,#7f091d 0%,#bc1b24 32%,#f07a27 57%,#fff0d7 83%,#a80c20 120%); min-height:100vh; }
+    body::before,body::after { content:""; position:fixed; pointer-events:none; z-index:-1; border-radius:50%; filter:blur(4px); }
+    body::before { width:70vw; height:24vw; right:-15vw; top:1vh; border:1px solid rgba(255,230,170,.58); transform:rotate(23deg); box-shadow:0 0 0 18px rgba(255,225,170,.09),0 0 0 42px rgba(255,236,190,.06); }
+    body::after { width:64vw; height:18vw; left:-20vw; bottom:4vh; border:1px solid rgba(255,229,179,.54); transform:rotate(-18deg); }
+    .wrap { padding-top:44px; }
+    .hero { color:#fff9ea; text-shadow:0 2px 12px rgba(75,0,12,.24); }
+    .hero .eyebrow { color:#ffe9ad; border-color:#ffe49d; font-family:Georgia,"Times New Roman",serif; letter-spacing:.19em; }
+    .hero h1 { font-family:Georgia,"Hiragino Mincho ProN","Yu Mincho",serif; font-weight:700; }
+    .hero h1::after { content:""; display:block; width:74px; height:2px; margin:18px auto 0; background:linear-gradient(90deg,transparent,#ffe6aa,transparent); }
+    .lead { color:#fff7e8; }
+    .rule { background:rgba(255,251,240,.9); border-color:rgba(255,226,172,.9); box-shadow:0 9px 25px rgba(83,0,9,.17); }
+    .question { border:2px solid rgba(222,168,71,.75); background:linear-gradient(160deg,rgba(255,254,249,.98),rgba(255,246,232,.98)); box-shadow:0 18px 45px rgba(72,0,12,.25); }
+    .q-number { color:#b02524; font-family:Georgia,"Times New Roman",serif; }
+    h2 { font-family:Georgia,"Hiragino Mincho ProN","Yu Mincho",serif; }
+    button.choice { border-color:#e8c89b; border-radius:11px; background:rgba(255,255,255,.86); }
+    button.choice:hover,button.choice:focus-visible,.choice.selected { border-color:#bd1722; background:linear-gradient(90deg,#fff2df,#fffaf2); box-shadow:inset 5px 0 0 #cc2022; }
+    .letter { background:linear-gradient(135deg,#e54222,#ae101f); font-family:Georgia,"Times New Roman",serif; }
+    .progress > span { background:linear-gradient(90deg,#f6a421,#c91b20); }
+    .result { border:2px solid rgba(222,168,71,.78); }
+    .result-head { background:linear-gradient(130deg,#7c0719,#bd1922 53%,#e57425); }
+    .result-head .eyebrow { color:#ffe8a7; border-color:#ffe1a1; font-family:Georgia,"Times New Roman",serif; }
+    .result-head h2 { font-family:Georgia,"Hiragino Mincho ProN","Yu Mincho",serif; }
+    .result-body h3,.count b { color:#b61c24; }
+    .primary { background:linear-gradient(95deg,#bf1421,#e83b20); box-shadow:0 8px 18px rgba(151,0,13,.20); }
+    .secondary { background:#fff2dd; color:#79121b; }
+    .guide { background:#fff3df; border-color:#e7c380; }
+    footer { color:#fff3dc; text-shadow:0 1px 5px rgba(55,0,10,.45); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <span class="eyebrow">PASSION LEADERS CAMP</span>
+      <h1>パフォーミングリーダー<br>4タイプ診断</h1>
+      <p class="lead">あなたの強みと、チームの成長を止めてしまう落とし穴を整理する6問診断です。</p>
+    </header>
+    <div class="rule"><b>所要時間：約2分</b><span>迷ったら「今の自分にいちばん近い」答えを選んでください。</span></div>
+    <section id="quiz" aria-live="polite">
+      <div class="progress" aria-label="診断の進捗"><span id="bar"></span></div>
+      <div class="counter" id="counter">質問 1 / 6</div>
+      <article class="question" id="question"></article>
+    </section>
+    <section class="result" id="result" aria-live="polite">
+      <div class="result-head"><span class="eyebrow">YOUR LEADERSHIP TYPE</span><h2 id="resultTitle"></h2></div>
+      <div class="result-body">
+        <p id="resultLead"></p>
+        <div class="tie" id="tie"></div>
+        <h3>あなたの強み</h3><p id="strength"></p>
+        <h3>チームで活かすヒント</h3><p id="tip"></p>
+        <div class="counts" id="counts"></div>
+        <div class="guide"><h3>講座での診断の使い方</h3><p>結果はラベル付けのためではなく、「自分はどんな場面で力を発揮し、どんな任せ方をするとチームが進むか」を対話する入口として使います。複数の傾向が同点の場合も、どちらもあなたの大切な持ち味です。</p></div>
+        <div class="result-actions"><button class="primary" id="restart">もう一度診断する</button><button class="secondary" id="copy">結果をコピー</button></div>
+      </div>
+    </section>
+    <footer>※本診断はリーダーシップの傾向を整理するための簡易診断です。</footer>
+  </main>
+<script type="module">
+  import { diagnose, shuffleAnswers } from './scoring.js';
+  const questions = [
+    ['新しい事業のチャンスが来た！まずどうする？', [['A','勝てると判断したら、自分が先頭に立って進める'],['B','戦略を考え、適任者に任せる'],['C','面白そう！みんなの意見を聞いて任せてみる'],['D','まず自分が動いて、みんなを守りながら進める']]],
+    ['部下が大きなミスをした！あなたの第一声は？', [['A','「原因は何だ？俺ならこうする！」'],['B','「原因と改善策を整理してみよう」'],['C','「大丈夫！次はどうしたい？」'],['D','「もう、しょうがないわね！私が何とかする！」']]],
+    ['社員に仕事を任せるとき、あなたは？', [['A','やり方を示し、重要な判断は自分でする'],['B','目標と権限を決め、進め方は本人に任せる'],['C','「信じてるよ！」と自由にやらせる'],['D','心配なので、途中で何度も確認して助ける']]],
+    ['会議で自分と違う意見が出たら？', [['A','筋が通っていなければ、はっきり反論する'],['B','根拠を比較し、最適な案を選ぶ'],['C','「いいね！」とまず受け止める'],['D','みんなが困らないよう、自分が結論を出す']]],
+    ['あなたが一番うれしい瞬間は？', [['A','自分の決断で大きな成果を出したとき'],['B','任せたチームが目標を達成したとき'],['C','社員が生き生きと挑戦しているとき'],['D','困っていた社員を助け、感謝されたとき']]],
+    ['会社が忙しくなり、仕事が回らない！どうする？', [['A','自分が指揮を執り、優先順位を決める'],['B','役割と仕組みを見直して任せる'],['C','みんなで協力して乗り越えようと声をかける'],['D','自分も現場に入り、みんなを助ける']]],
+  ];
+  const profiles = {
+    A: { label:'① ガキ大将', lead:'決断と突破力で、先頭に立って道を切り拓くタイプです。', strength:'迷いがある場面でも旗を立て、前へ進む力があります。スピードが必要な局面で、周囲に安心感と推進力を生み出します。', tip:'自分の判断を伝える時に「なぜそうするのか」も共有すると、周りがより自律的に動きやすくなります。' },
+    B: { label:'② 名監督', lead:'戦略と仕組みで、チームの力を最大化するタイプです。', strength:'目的・役割・権限を整理し、適任者へ任せることで、再現性のある成果をつくれます。', tip:'仕組みが整っているからこそ、ときどき感情や挑戦の余白にも目を向けると、チームの熱量がさらに上がります。' },
+    C: { label:'③ 人たらしの兄貴・姉御', lead:'人の可能性を信じ、挑戦したくなる空気をつくるタイプです。', strength:'まず受け止め、信頼を言葉にできるため、周りが安心して意見や挑戦を出しやすくなります。', tip:'応援に加えて、ゴール・期限・判断基準を一緒に置くと、信頼が成果へつながりやすくなります。' },
+    D: { label:'④ 肝っ玉カーちゃん', lead:'困っている人を放っておけず、現場を守り抜くタイプです。', strength:'チームの小さな変化に気づき、安心して働ける土台をつくる力があります。非常時には大きな支えになります。', tip:'全部を抱え込まず、「これは任せる」と線を引くことも、チームを育てる大事なリーダーシップです。' },
+  };
+  let step=0, answers=[];
+  const $=(id)=>document.getElementById(id);
+  function render(){
+    const [title,choices]=questions[step];
+    const displayChoices = shuffleAnswers(choices);
+    const isLast = step === questions.length - 1;
+    $('bar').style.width=`${(step/questions.length)*100}%`;
+    $('counter').textContent=`質問 ${step+1} / ${questions.length}`;
+    $('question').innerHTML=`<div class="q-number">QUESTION ${String(step+1).padStart(2,'0')}</div><h2>${title}</h2><div class="choices">${displayChoices.map(([l,t])=>`<button class="choice" data-choice="${l}"><span class="letter">${l}</span><span>${t}</span></button>`).join('')}</div>${isLast ? '<button class="primary final-action" id="showResult" disabled>診断結果を見る</button>' : ''}`;
+    document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{
+      answers[step] = b.dataset.choice;
+      if (isLast) {
+        document.querySelectorAll('[data-choice]').forEach(choice => choice.classList.toggle('selected', choice === b));
+        $('showResult').disabled = false;
+      } else {
+        step++;
+        render();
+      }
+    }));
+    if (isLast) $('showResult').addEventListener('click', showResult);
+  }
+  function showResult(){ const r=diagnose(answers), p=profiles[r.key]; $('quiz').style.display='none'; $('result').classList.add('show'); $('resultTitle').textContent=p.label; $('resultLead').textContent=p.lead; $('strength').textContent=p.strength; $('tip').textContent=p.tip; $('counts').innerHTML=Object.entries(r.counts).map(([k,n])=>`<div class="count"><b>${k}：${n}</b><span>${profiles[k].label.replace(/^① |^② |^③ |^④ /,'')}</span></div>`).join(''); if(r.tiedKeys.length>1){$('tie').classList.add('show'); $('tie').textContent=`同点タイプ：${r.tiedKeys.map(k=>profiles[k].label).join(' ／ ')}。最初に選んだ傾向をメイン結果として表示しています。`;}}
+  $('restart').addEventListener('click',()=>{step=0;answers=[];$('result').classList.remove('show');$('quiz').style.display='block';render();window.scrollTo({top:0,behavior:'smooth'});});
+  $('copy').addEventListener('click',async()=>{const r=diagnose(answers),p=profiles[r.key]; const text=`リーダータイプ診断結果：${p.label}\n${p.lead}\n\n強み：${p.strength}\n\nチームで活かすヒント：${p.tip}`; try { await navigator.clipboard.writeText(text); $('copy').textContent='コピーしました！'; setTimeout(()=> $('copy').textContent='結果をコピー',1800); } catch { alert(text); }});
+  render();
+</script>
+</body>
+</html>
