@@ -7,7 +7,7 @@ const page = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 test('presents the enrollment four-type survey framing', () => {
   assert.match(page, /新しい時代の人を巻き込む/);
   assert.match(page, /エンロールメント4タイプサーベイ/);
-  assert.match(page, /あなたは、どの巻き込みタイプ？/);
+  assert.match(page, /あなたは、どの巻き込みタイプでしょうか？/);
 });
 
 test('includes all four enrollment archetypes and their cautions', () => {
@@ -26,6 +26,10 @@ test('includes all four enrollment archetypes and their cautions', () => {
   }
 });
 
+test('keeps the time estimate horizontal on narrow screens', () => {
+  assert.match(page, /\.rule b \{[^}]*white-space:nowrap/);
+  assert.match(page, /現在の自分に最も近い答えをお選びください/);
+});
 test('keeps all four answer keys in every enrollment survey question', () => {
   const questionLines = page.split('\n').filter((line) => line.trim().startsWith("['") && line.includes("[['A'"));
   assert.equal(questionLines.length, 6);
