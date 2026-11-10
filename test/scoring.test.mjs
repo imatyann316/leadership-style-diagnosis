@@ -2,29 +2,29 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { diagnose, labelSequentially, shuffleAnswers } from '../scoring.js';
 
-test('returns ガキ大将 when A is the most selected answer', () => {
+test('returns 暴走赤レンジャーお兄さん when A is the most selected answer', () => {
   const result = diagnose(['A', 'A', 'B', 'C', 'D', 'A']);
   assert.equal(result.key, 'A');
-  assert.equal(result.type, 'ガキ大将');
+  assert.equal(result.type, '暴走赤レンジャーお兄さん');
   assert.deepEqual(result.counts, { A: 3, B: 1, C: 1, D: 1 });
 });
 
-test('returns 名監督 when B is the most selected answer', () => {
+test('returns 人たらし女帝お姉さん when B is the most selected answer', () => {
   const result = diagnose(['B', 'B', 'A', 'C', 'D', 'B']);
   assert.equal(result.key, 'B');
-  assert.equal(result.type, '名監督');
+  assert.equal(result.type, '人たらし女帝お姉さん');
 });
 
-test('returns 人たらしの兄貴・姉御 when C is the most selected answer', () => {
+test('returns 破天荒次男 when C is the most selected answer', () => {
   const result = diagnose(['C', 'C', 'A', 'B', 'D', 'C']);
   assert.equal(result.key, 'C');
-  assert.equal(result.type, '人たらしの兄貴・姉御');
+  assert.equal(result.type, '破天荒次男');
 });
 
-test('returns 肝っ玉カーちゃん when D is the most selected answer', () => {
+test('returns 愛され他力本願末っ子 when D is the most selected answer', () => {
   const result = diagnose(['D', 'D', 'A', 'B', 'C', 'D']);
   assert.equal(result.key, 'D');
-  assert.equal(result.type, '肝っ玉カーちゃん');
+  assert.equal(result.type, '愛され他力本願末っ子');
 });
 
 test('uses the first answer among tied top types as the primary result and reports the tie', () => {
