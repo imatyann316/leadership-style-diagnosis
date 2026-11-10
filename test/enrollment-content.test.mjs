@@ -21,6 +21,7 @@ test('includes all four enrollment archetypes and their cautions', () => {
     '本人だけ次の祭りに行ってる危険あり（笑）',
     'ただの丸投げ社長になる危険あり（笑）',
     '一人で500万円を稼ぐ経営者から、3人で6,000万円を生み出す経営者へ',
+    '絶対面白いじゃん！今すぐやろうぜ！',
   ]) {
     assert.match(page, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
