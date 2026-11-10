@@ -11,7 +11,7 @@
     .wrap { width:min(760px,calc(100% - 32px)); margin:0 auto; padding:52px 0 72px; }
     .hero { text-align:center; margin:0 auto 30px; } .eyebrow { display:inline-block; letter-spacing:.14em; font-size:.76rem; color:var(--accent); font-weight:800; border-bottom:2px solid var(--gold); padding:0 8px 4px; }
     h1 { margin:16px 0 8px; font-size:clamp(1.85rem,6vw,3rem); line-height:1.25; letter-spacing:.03em; } .lead { margin:0 auto; color:var(--muted); max-width:560px; font-size:.98rem; }
-    .rule { display:flex; gap:10px; align-items:center; background:rgba(255,255,255,.72); border:1px solid var(--line); padding:13px 16px; border-radius:14px; margin:24px 0 28px; color:var(--muted); font-size:.87rem; } .rule b { color:var(--accent); }
+    .rule { display:grid; grid-template-columns:max-content minmax(0,1fr); gap:12px; align-items:center; background:rgba(255,255,255,.72); border:1px solid var(--line); padding:14px 16px; border-radius:14px; margin:24px 0 28px; color:var(--muted); font-size:.87rem; } .rule b { color:var(--accent); white-space:nowrap; display:inline-block; padding:4px 9px; border:1px solid currentColor; border-radius:999px; line-height:1.35; }
     .progress { height:9px; background:#e4ebe5; overflow:hidden; border-radius:99px; margin:0 0 10px; } .progress > span { display:block; height:100%; width:0%; background:linear-gradient(90deg,#3b9b70,#1d684d); border-radius:99px; transition:width .25s; } .counter { text-align:right; color:var(--muted); font-size:.82rem; margin-bottom:18px; }
     .question { background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow); border-radius:22px; padding:clamp(20px,5vw,34px); margin-bottom:22px; } .q-number { color:var(--accent); font-weight:800; font-size:.8rem; letter-spacing:.08em; } h2 { margin:8px 0 22px; font-size:clamp(1.25rem,4.6vw,1.62rem); line-height:1.5; }
     .choices { display:grid; gap:10px; } button.choice { appearance:none; width:100%; text-align:left; border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:14px; padding:14px 15px; font:inherit; cursor:pointer; display:flex; gap:12px; align-items:flex-start; transition:.18s; } button.choice:hover,button.choice:focus-visible { outline:none; border-color:var(--accent); background:var(--accent-pale); transform:translateY(-1px); } .letter { color:white; background:var(--accent); width:26px; height:26px; border-radius:50%; display:grid; place-items:center; flex:0 0 auto; font-size:.78rem; font-weight:800; margin-top:2px; }
@@ -19,7 +19,7 @@
     .counts { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:22px 0; } .count { border:1px solid var(--line); border-radius:12px; text-align:center; padding:10px 4px; background:#fbfdfb; } .count b { display:block; color:var(--accent); font-size:1.3rem; line-height:1.25; } .count span { font-size:.74rem; color:var(--muted); }
     .choice.selected { border-color:var(--accent); background:var(--accent-pale); box-shadow:inset 0 0 0 1px var(--accent); } .result-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:26px; } .primary,.secondary { border-radius:12px; border:0; padding:13px 16px; font:inherit; font-weight:800; cursor:pointer; } .primary { background:var(--accent); color:#fff; } .primary:disabled { opacity:.45; cursor:not-allowed; } .secondary { background:#edf2ee; color:var(--ink); } .final-action { margin-top:20px; width:100%; font-size:1rem; } .guide { margin-top:26px; padding:20px; background:#f4f8f4; border:1px solid var(--line); border-radius:16px; } .guide h3 { margin:0 0 8px; color:var(--accent); } .guide p { font-size:.9rem; color:var(--muted); }
     footer { text-align:center; color:var(--muted); font-size:.75rem; margin-top:25px; }
-    @media (max-width:480px) { .wrap { width:min(100% - 24px,760px); padding-top:32px; } .counts { grid-template-columns:repeat(2,1fr); } button.choice { padding:13px; } }
+    @media (max-width:480px) { .wrap { width:min(100% - 24px,760px); padding-top:32px; } .counts { grid-template-columns:repeat(2,1fr); } button.choice { padding:13px; } .rule { grid-template-columns:1fr; gap:8px; } .rule b { justify-self:start; } }
 
     /* Passion Leaders Camp visual language: crimson, gold, warm light, and a calm readable form surface. */
     :root { --ink:#2b1720; --muted:#745653; --paper:#fff8ed; --card:#fffdf8; --line:#e8c99a; --accent:#a81222; --accent-pale:#fff0e2; --gold:#d79a26; --shadow:0 18px 50px rgba(112,18,27,.20); }
@@ -57,9 +57,9 @@
     <header class="hero">
       <span class="eyebrow">独自開発！！</span>
       <h1>新しい時代の人を巻き込む<br>エンロールメント<br>4タイプサーベイ</h1>
-      <p class="lead">あなたは、どの巻き込みタイプ？<br>性格、クセ、強みこそが、人を動かす最強の武器になる。</p>
+      <p class="lead">あなたは、どの巻き込みタイプでしょうか？<br>あなたらしい性格や強みを、人を動かす力として活かすためのサーベイです。</p>
     </header>
-    <div class="rule"><b>所要時間：約2分</b><span>先頭を走っても、愛で包んでも、ワクワクで熱狂させても、思いきり甘えてもいい。今の自分にいちばん近い答えを選んでください。</span></div>
+    <div class="rule"><b>所要時間：約2分</b><span>どの選択肢も、その人らしい巻き込み方の表れです。迷った場合は、現在の自分に最も近い答えをお選びください。</span></div>
     <section id="quiz" aria-live="polite">
       <div class="progress" aria-label="診断の進捗"><span id="bar"></span></div>
       <div class="counter" id="counter">質問 1 / 6</div>
