@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { diagnose, shuffleAnswers } from '../scoring.js';
+import { diagnose, labelSequentially, shuffleAnswers } from '../scoring.js';
 
 test('returns ガキ大将 when A is the most selected answer', () => {
   const result = diagnose(['A', 'A', 'B', 'C', 'D', 'A']);
@@ -37,6 +37,15 @@ test('rejects an incomplete diagnosis', () => {
   assert.throws(() => diagnose(['A', 'B']), /6 answers/);
 });
 
+test('labels shuffled choices sequentially while retaining original answer keys', () => {
+  const shuffled = [['C', 'c text'], ['A', 'a text'], ['D', 'd text'], ['B', 'b text']];
+  assert.deepEqual(labelSequentially(shuffled), [
+    ['A', 'C', 'c text'],
+    ['B', 'A', 'a text'],
+    ['C', 'D', 'd text'],
+    ['D', 'B', 'b text'],
+  ]);
+});
 test('shuffles display order without changing the answer choices', () => {
   const choices = [['A', 'a'], ['B', 'b'], ['C', 'c'], ['D', 'd']];
   const values = [0, 0, 0];

@@ -80,7 +80,7 @@
     <footer>※本診断はリーダーシップの傾向を整理するための簡易診断です。</footer>
   </main>
 <script type="module">
-  import { diagnose, shuffleAnswers } from './scoring.js';
+  import { diagnose, labelSequentially, shuffleAnswers } from './scoring.js';
   const questions = [
     ['新しい事業のチャンスが来た！まずどうする？', [['A','勝てると判断したら、自分が先頭に立って進める'],['B','戦略を考え、適任者に任せる'],['C','面白そう！みんなの意見を聞いて任せてみる'],['D','まず自分が動いて、みんなを守りながら進める']]],
     ['部下が大きなミスをした！あなたの第一声は？', [['A','「原因は何だ？俺ならこうする！」'],['B','「原因と改善策を整理してみよう」'],['C','「大丈夫！次はどうしたい？」'],['D','「もう、しょうがないわね！私が何とかする！」']]],
@@ -99,11 +99,11 @@
   const $=(id)=>document.getElementById(id);
   function render(){
     const [title,choices]=questions[step];
-    const displayChoices = shuffleAnswers(choices);
+    const displayChoices = labelSequentially(shuffleAnswers(choices));
     const isLast = step === questions.length - 1;
     $('bar').style.width=`${(step/questions.length)*100}%`;
     $('counter').textContent=`質問 ${step+1} / ${questions.length}`;
-    $('question').innerHTML=`<div class="q-number">QUESTION ${String(step+1).padStart(2,'0')}</div><h2>${title}</h2><div class="choices">${displayChoices.map(([l,t])=>`<button class="choice" data-choice="${l}"><span class="letter">${l}</span><span>${t}</span></button>`).join('')}</div>${isLast ? '<button class="primary final-action" id="showResult" disabled>診断結果を見る</button>' : ''}`;
+    $('question').innerHTML=`<div class="q-number">QUESTION ${String(step+1).padStart(2,'0')}</div><h2>${title}</h2><div class="choices">${displayChoices.map(([displayLabel,answerKey,text])=>`<button class="choice" data-choice="${answerKey}"><span class="letter">${displayLabel}</span><span>${text}</span></button>`).join('')}</div>${isLast ? '<button class="primary final-action" id="showResult" disabled>診断結果を見る</button>' : ''}`;
     document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{
       answers[step] = b.dataset.choice;
       if (isLast) {

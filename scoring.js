@@ -29,4 +29,12 @@ export function shuffleAnswers(choices, random = Math.random) {
   return shuffled;
 }
 
+export function labelSequentially(choices) {
+  return choices.map(([answerKey, text], index) => [
+    String.fromCharCode(65 + index),
+    answerKey,
+    text,
+  ]);
+}
+
 export { TYPES };
